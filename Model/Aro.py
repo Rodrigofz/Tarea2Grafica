@@ -15,18 +15,23 @@ class Aro(Figura):
 
 
     def figura(self):
-        if self.tipo == 'normal':
-            glLineWidth(20)
-            glBegin(GL_LINE_LOOP)
-            glColor3f(1, 0, 0)
-            radioM = self.radioM
-            radiom = self.radiom
-            ang = 2 * pi / 20
-            for i in range(21):
-                ang_i = ang * i
-                glVertex(cos(ang_i) * radioM, sin(ang_i) * radiom)
+        for j in range(0, 5):
+            if self.tipo == 'normal':
+                glLineWidth(20)
+                glBegin(GL_LINE_LOOP)
 
-            glEnd()
+                radioM = self.radioM
+                radiom = self.radiom
+                ang = 2 * pi / 20
+                for i in range(21):
+                    ang_i = ang * i
+                    if  sin(ang_i) * radiom > 0:
+                        glColor3f(152/255, 26/255, 17/255)
+                    else:
+                        glColor3f(233/255, 26/255, 17/255)
+                    glVertex(cos(ang_i) * radioM, sin(ang_i) * radiom + j)
+
+                glEnd()
 
 
         if self.tipo == 'tubo':
