@@ -10,13 +10,14 @@ class Pelota(Figura):
         self.velY = -0.1
         self.t = 0
         self.dir = 0
+        self.radio = 30
         super().__init__(pos, rgb)
 
     def figura(self):
         glBegin(GL_TRIANGLE_FAN)
         glColor3f(255.0 / 255, 128.0 / 255, 0)
         glVertex2f(0, 0)
-        radio = 30
+        radio = self.radio
         ang = 2 * pi / 20
         for i in range(21):
             ang_i = ang * i
@@ -40,3 +41,12 @@ class Pelota(Figura):
         self.t = 0
         self.dir = 1
         self.velY = 10
+
+    def chocarArriba(self):
+        self.t = 10
+        self.dir = 0
+        self.velY = -0.1
+
+
+
+

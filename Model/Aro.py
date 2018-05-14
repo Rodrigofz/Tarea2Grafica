@@ -5,19 +5,18 @@ import random
 
 class Aro(Figura):
     def __init__(self, pos=Vector(50.0, 30.0), rgb=(255.0 / 255, 0, 0)):
-        opciones = ['normal', 'tubo']
+        opciones = ['normal', 'tubo', 'raro']
         self.tipo = opciones[random.randint(0,len(opciones) - 1)]
-        self.radioM = 70
-        self.radiom = 15
-        self.reaparicionRatio = (6/8)
-        self.velocidad = -2
+        self.radioM = random.randint(50, 100)
+        self.radiom = self.radioM * 0.21
+        self.reaparicionRatio = 0.70
+        self.velocidad = -5
         super().__init__(pos, rgb)
 
 
     def figura(self):
-        for j in range(0, 5):
-            if self.tipo == 'normal':
-                glLineWidth(20)
+        if self.tipo == 'normal':
+            for j in range(0, 10):
                 glBegin(GL_LINE_LOOP)
 
                 radioM = self.radioM
@@ -36,8 +35,6 @@ class Aro(Figura):
 
         if self.tipo == 'tubo':
             for j in range(0,70):
-
-                glLineWidth(20)
                 glBegin(GL_LINE_LOOP)
 
                 radioM = self.radioM * 0.8
@@ -45,7 +42,7 @@ class Aro(Figura):
 
                 radiom = self.radiom * 0.8
                 ang = 2 * pi / 20
-                for i in np.arange(0, 50, 0.1) :
+                for i in range(50):
                     ang_i = ang * i
                     if sin(ang_i) * radiom < 0:
                         xCrit = -20
@@ -61,8 +58,22 @@ class Aro(Figura):
 
                 glEnd()
 
+        if self.tipo == 'raro':
+            #for j in range(0, 5):
+                glBegin(GL_LINE_LOOP)
 
+                radioM = self.radioM
+                radiom = self.radiom
+                ang = 2 * pi / 20
+                for i in range(21):
+                    ang_i = ang * i
+                    if  sin(ang_i) * radiom > 0:
+                        glColor3f(17/255, 26/255, 152/255)
+                    else:
+                        glColor3f(17/255, 26/255, 233/255)
+                    glVertex(cos(ang_i) * radioM + cos(ang_i*20)*3, sin(ang_i) * radiom + cos(ang_i*20)*3)
 
+                glEnd()
 
     def mover(self):
         self.pos += Vector(self.velocidad, 0)
@@ -71,6 +82,6 @@ class Aro(Figura):
         return self.pos.cartesianas()[0] + self.radioM > 0
 
     def generarNuevo(self, anchoPantalla):
-        return self.pos.cartesianas()[0] + self.radioM in range(int(self.reaparicionRatio * anchoPantalla - 2),int(self.reaparicionRatio * anchoPantalla + 2))
+        return self.pos.cartesianas()[0] + self.radioM < self.reaparicionRatio * anchoPantalla
 
 
