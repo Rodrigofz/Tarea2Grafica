@@ -5,7 +5,7 @@ import pygame
 def draw_text(x, y, text, color=(255, 255, 255), fondo=(0, 0, 0, 0), tamano=20):
     glEnable(GL_BLEND)
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA)
-    font = pygame.font.Font("ARCADE.TTF", tamano)
+    font = pygame.font.Font("Resources/ARCADE.TTF", tamano)
     text_surface = font.render(text, 4, color, fondo)
     text_surface.set_alpha(0)
     text_data = pygame.image.tostring(text_surface, "RGBA", True)

@@ -10,7 +10,7 @@ class Aro(Figura):
         self.radioM = random.randint(50, 100)
         self.radiom = self.radioM * 0.21
         self.reaparicionRatio = 0.70
-        self.velocidad = -5
+        self.velocidad = -7
         self.atravesado = False
         self.score = 0
         super().__init__(pos, rgb)
@@ -18,6 +18,8 @@ class Aro(Figura):
 
     def figura(self):
         if self.tipo == 'normal':
+            self.sonido = pygame.mixer.Sound("Resources/normalHoop.wav")
+            self.sonido.set_volume(0.3)
             for j in range(0, 10):
                 glBegin(GL_LINE_LOOP)
 
@@ -36,9 +38,10 @@ class Aro(Figura):
 
 
         if self.tipo == 'tubo':
+            self.sonido = pygame.mixer.Sound("Resources/marioTube.wav")
+            self.sonido.set_volume(0.1)
             for j in range(0,70):
                 glBegin(GL_LINE_LOOP)
-
                 radioM = self.radioM * 0.8
                 if j >= 55: radioM = radioM * 1.2
 
@@ -61,7 +64,9 @@ class Aro(Figura):
                 glEnd()
 
         if self.tipo == 'raro':
-            #for j in range(0, 5):
+            self.sonido = pygame.mixer.Sound("Resources/normalHoop.wav")
+            self.sonido.set_volume(0.3)
+            for j in range(0, 5):
                 glBegin(GL_LINE_LOOP)
 
                 radioM = self.radioM

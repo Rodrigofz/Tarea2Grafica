@@ -38,7 +38,24 @@ class Pelota(Figura):
         self.t = 10
         self.velY = -0.1
 
-    def atravesoAro(self, aro):
+    def atravesoAroClean(self, aro):
+        pelotaX = self.pos.cartesianas()[0]
+        aroX = aro.pos.cartesianas()[0]
+
+        pelotaY = self.pos.cartesianas()[1]
+        aroY = aro.pos.cartesianas()[1]
+
+        checkX = (pelotaX - self.radio) >= (aroX - aro.radioM + 20) and (pelotaX + self.radio) <= (aroX + aro.radioM - 20)
+        checkY = pelotaY >= aroY - 20 and pelotaY <= aroY + 20
+        checkDir = self.dir
+        checkAro = not aro.atravesado
+
+        total = checkX and checkY and checkDir and checkAro
+        if total: aro.atravesado = True
+
+        return total
+
+    def atravesoAroTocandoBordes(self, aro):
         pelotaX = self.pos.cartesianas()[0]
         aroX = aro.pos.cartesianas()[0]
 
@@ -53,7 +70,25 @@ class Pelota(Figura):
         total = checkX and checkY and checkDir and checkAro
         if total: aro.atravesado = True
 
+        return total and not self.atravesoAroClean(aro)
+
+
+
+    def aroPorDebajo(self, aro):
+        pelotaX = self.pos.cartesianas()[0]
+        aroX = aro.pos.cartesianas()[0]
+
+        pelotaY = self.pos.cartesianas()[1]
+        aroY = aro.pos.cartesianas()[1]
+
+        checkX = (pelotaX - self.radio) >= (aroX - aro.radioM - 20) and (pelotaX + self.radio) <= (aroX + aro.radioM + 20)
+        checkY = pelotaY >= aroY - 40 and pelotaY <= aroY + 40
+        checkDir = self.dir
+
+        total = checkX and checkY and not checkDir
+
         return total
+
 
 
 
