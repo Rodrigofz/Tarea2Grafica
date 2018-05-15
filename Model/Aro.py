@@ -11,6 +11,8 @@ class Aro(Figura):
         self.radiom = self.radioM * 0.21
         self.reaparicionRatio = 0.70
         self.velocidad = -5
+        self.atravesado = False
+        self.score = 0
         super().__init__(pos, rgb)
 
 

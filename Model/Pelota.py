@@ -9,7 +9,7 @@ class Pelota(Figura):
         self.acY = -0.045
         self.velY = -0.1
         self.t = 0
-        self.dir = 0
+        self.dir = True
         self.radio = 30
         super().__init__(pos, rgb)
 
@@ -26,27 +26,34 @@ class Pelota(Figura):
         glEnd()
 
     def mover(self):
-        if self.dir != 0:
-            self.dir += 1
-            if self.dir == 1000:
-                self.dir = 0
-                self.t = 0
-                self.vel = -0.1
-
         self.pos += Vector(0, self.velY + self.acY * self.t ** 2)
-
         self.t += 1
+        self.dir = self.velY + self.acY * self.t ** 2 < 0
 
     def saltar(self):
         self.t = 0
-        self.dir = 1
         self.velY = 10
 
     def chocarArriba(self):
         self.t = 10
-        self.dir = 0
         self.velY = -0.1
 
+    def atravesoAro(self, aro):
+        pelotaX = self.pos.cartesianas()[0]
+        aroX = aro.pos.cartesianas()[0]
+
+        pelotaY = self.pos.cartesianas()[1]
+        aroY = aro.pos.cartesianas()[1]
+
+        checkX = (pelotaX - self.radio) >= (aroX - aro.radioM) and (pelotaX + self.radio) <= (aroX + aro.radioM)
+        checkY = pelotaY >= aroY - 20 and pelotaY <= aroY + 20
+        checkDir = self.dir
+        checkAro = not aro.atravesado
+
+        total = checkX and checkY and checkDir and checkAro
+        if total: aro.atravesado = True
+
+        return total
 
 
 
