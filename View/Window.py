@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-import pygame
-from CC3501Utils import *
+from Resources.CC3501Utils import *
 from Model.Text import draw_text
 from Model.Aro import Aro
 

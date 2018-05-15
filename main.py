@@ -1,13 +1,10 @@
 #!/usr/bin/env python
-import pygame
-from CC3501Utils import *
-from Controller.Control import Control
+from Resources.CC3501Utils import *
 from View.Window import Window
 from View.Escena import Escena
 from Model.Pelota import Pelota
 from Model.Aro import Aro
 import random
-from Model.Text import draw_text
 
 
 def main():

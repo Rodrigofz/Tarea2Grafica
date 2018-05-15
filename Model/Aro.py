@@ -1,6 +1,5 @@
 #!/usr/bin/env python
-from CC3501Utils import *
-import numpy as np
+from Resources.CC3501Utils import *
 import random
 
 class Aro(Figura):

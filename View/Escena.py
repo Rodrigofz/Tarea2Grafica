@@ -1,6 +1,5 @@
-from CC3501Utils import *
+from Resources.CC3501Utils import *
 import random
-from Model.Text import draw_text
 
 
 class Escena(Figura):

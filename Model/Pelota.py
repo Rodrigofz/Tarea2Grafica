@@ -1,7 +1,5 @@
 #!/usr/bin/env python
-import pygame
-from CC3501Utils import *
-import numpy
+from Resources.CC3501Utils import *
 
 
 class Pelota(Figura):
