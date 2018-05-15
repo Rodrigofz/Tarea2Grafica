@@ -17,8 +17,8 @@ class Aro(Figura):
 
     def figura(self):
         if self.tipo == 'normal':
-            self.sonido = pygame.mixer.Sound("Resources/normalHoop.wav")
-            self.sonido.set_volume(0.3)
+            self.sonido = pygame.mixer.Sound("Resources/hoop1.wav")
+            self.sonido.set_volume(0.4)
             for j in range(0, 10):
                 glBegin(GL_LINE_LOOP)
 
@@ -63,23 +63,73 @@ class Aro(Figura):
                 glEnd()
 
         if self.tipo == 'raro':
-            self.sonido = pygame.mixer.Sound("Resources/normalHoop.wav")
-            self.sonido.set_volume(0.3)
-            for j in range(0, 5):
-                glBegin(GL_LINE_LOOP)
+            self.sonido = pygame.mixer.Sound("Resources/hoop1.wav")
+            self.sonido.set_volume(0.4)
+            radio = self.radioM * 0.8
+            self.radioM = self.radioM * 0.8
 
-                radioM = self.radioM
-                radiom = self.radiom
-                ang = 2 * pi / 20
-                for i in range(21):
-                    ang_i = ang * i
-                    if  sin(ang_i) * radiom > 0:
-                        glColor3f(17/255, 26/255, 152/255)
-                    else:
-                        glColor3f(17/255, 26/255, 233/255)
-                    glVertex(cos(ang_i) * radioM + cos(ang_i*20)*3, sin(ang_i) * radiom + cos(ang_i*20)*3)
+            # Rectangulo inferior
+            glBegin(GL_QUADS)
+            glColor3f(224 / 255, 224 / 255, 224 / 255)
+            glVertex2f(-radio * 0.5, -radio * 0.7)
+            glVertex2f(radio * 0.5, -radio * 0.7)
+            glVertex2f(radio * 0.5, -radio * 1.5)
+            glVertex2f(-radio * 0.5, -radio * 1.5)
+            glEnd()
 
-                glEnd()
+            glBegin(GL_LINE_LOOP)
+            glColor3f(0, 0, 0)
+            glVertex2f(-radio * 0.5, -radio * 0.7)
+            glVertex2f(radio * 0.5, -radio * 0.7)
+            glVertex2f(radio * 0.5, -radio * 1.5)
+            glVertex2f(-radio * 0.5, -radio * 1.5)
+            glEnd()
+
+            # Rectangulo superior
+            glBegin(GL_QUADS)
+            glColor3f(224 / 255, 224 / 255, 224 / 255)
+            glVertex2f(-radio * 0.7, 0)
+            glVertex2f(-radio * 0.8, radio * 1.2)
+            glVertex2f(radio * 0.8, radio * 1.2)
+            glVertex2f(radio * 0.7, 0)
+            glEnd()
+
+            glBegin(GL_LINE_LOOP)
+            glColor3f(0,0,0)
+            glVertex2f(-radio * 0.7, 0)
+            glVertex2f(-radio * 0.8, radio * 1.2)
+            glVertex2f(radio * 0.8, radio * 1.2)
+            glVertex2f(radio * 0.7, 0)
+            glEnd()
+
+            # Semicirculo
+            glBegin(GL_TRIANGLE_FAN)
+            glColor3f(224/255, 224/255, 224/255)
+            glVertex2f(0, 0)
+            ang = 2 * pi / 20
+            for i in range(10 , 21):
+                ang_i = ang * i
+                glVertex(cos(ang_i) * radio, sin(ang_i) * radio)
+            glEnd()
+
+            glBegin(GL_LINE_LOOP)
+            glColor3f(0, 0, 0)
+            ang = 2 * pi / 20
+            for i in range(10, 21):
+                ang_i = ang * i
+                glVertex(cos(ang_i) * radio, sin(ang_i) * radio)
+
+            glEnd()
+
+            #Cadena
+            glBegin(GL_TRIANGLES)
+            glColor3f(96/255, 95/255, 95/255)
+            glVertex2f(-radio * 0.5, radio * 0.9)
+            glVertex2f(-radio * 0.7, radio)
+            glVertex2f(-radio * 0.5, radio * 1.1)
+
+            glEnd()
+
 
     def mover(self):
         self.pos += Vector(self.velocidad, 0)

@@ -29,8 +29,11 @@ def main():
 
     #Sonido
     jumpSound = pygame.mixer.Sound("Resources/jump1.wav")
-    jumpSound.set_volume(0.2)
+    jumpSound.set_volume(0.1)
 
+    pygame.mixer.music.load("Resources/music.mp3")
+    pygame.mixer.music.set_volume(0.3)
+    #pygame.mixer.music.play(-1, 0.0)
 
     run = True
 

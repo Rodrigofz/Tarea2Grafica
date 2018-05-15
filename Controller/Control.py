@@ -1,7 +1,6 @@
 #!/usr/bin/env python
-import pygame
 
-from CC3501Utils import *
+from Resources.CC3501Utils import *
 from Model.Pelota import Pelota
 from View.Window import Window
 
