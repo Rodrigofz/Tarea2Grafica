@@ -162,24 +162,3 @@ class Escena(Figura):
             glVertex(cos(ang_i) * radio + self.ancho * 0.8, sin(ang_i) * radio + self.alto * 0.7)
 
         glEnd()
-
-        """
-        # Colchonetas
-        colores = [(1,0,0), (0,0,1)]
-        j = 0
-        k = 0
-        while j < 5 * 20:
-            color = colores[k]
-            i = 0
-            while i < 20:
-                glBegin(GL_QUADS)
-                glColor(color)
-                glVertex2f(500, 10 + i + j)
-                glVertex2f(535, self.altoSuelo + i + j)
-                glVertex2f(self.ancho, self.altoSuelo + i + j)
-                glVertex2f(self.ancho - 35, 10 + i + j)
-                glEnd()
-                i += 1
-            k = (k+1)%2
-            j += 20
-        """
