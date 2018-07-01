@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 from Resources.CC3501Utils import *
 from View.Window import Window
-from View.Escena import Escena
+from Model.Escena import Escena
 from Model.Pelota import Pelota
 from Model.Aro import Aro
 import random
@@ -10,7 +10,7 @@ import random
 def main():
     ancho = 800
     alto = 600
-    init(ancho, alto, "Mi juego")
+    init(ancho, alto, "Flappy dunk")
     vista = Window()
 
     items = []
@@ -31,13 +31,23 @@ def main():
     jumpSound = pygame.mixer.Sound("Resources/jump1.wav")
     jumpSound.set_volume(0.1)
 
-    pygame.mixer.music.load("Resources/music.mp3")
-    pygame.mixer.music.set_volume(0.3)
-    #pygame.mixer.music.play(-1, 0.0)
-
     run = True
+    pause = True
 
     while run:
+        while pause:
+            vista.dibujar(items, escena, score, True)
+            pygame.display.flip()
+            pygame.time.wait(int(1000 / 30))
+            for event in pygame.event.get():
+                if event.type == KEYDOWN:
+                    if event.key == K_p:
+                        pause = False
+                if event.type == QUIT:
+                    pause = False
+                    run = False
+
+
         #Checkear input del teclado
         for event in pygame.event.get():
             if event.type == QUIT:
@@ -47,17 +57,21 @@ def main():
                 if event.key == K_SPACE:
                     jumpSound.play()
                     pelota.saltar()
+                if event.key == K_p:
+                    pause = True
 
         #Dibujar
 
         vista.dibujar(items, escena, score)
 
-        #Rebotar abajo
+        #Chocar abajo
         if pelota.pos.cartesianas()[1] <= 0:
+            print ('No puedes tocar el suelo :(')
             run = False
 
-        #Rebotar arriba
+        #Chocar arriba
         if pelota.pos.cartesianas()[1] >= alto:
+            print ('No puedes tocar el techo :(')
             run = False
 
         #Generar aro nuevo
@@ -94,7 +108,7 @@ def main():
         pygame.display.flip()
         pygame.time.wait(int(1000 / 30))
 
-
+    print('JUEGO TERMINADO')
     pygame.quit()
 
 
