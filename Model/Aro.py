@@ -4,7 +4,7 @@ import random
 
 class Aro(Figura):
     def __init__(self, pos=Vector(50.0, 30.0), rgb=(255.0 / 255, 0, 0)):
-        opciones = ['normal', 'tubo', 'raro']
+        opciones = ['normal', 'tubo', 'toilet']
         self.tipo = opciones[random.randint(0,len(opciones) - 1)]
         self.radioM = random.randint(50, 100)
         self.radiom = self.radioM * 0.21
@@ -62,9 +62,9 @@ class Aro(Figura):
 
                 glEnd()
 
-        if self.tipo == 'raro':
-            self.sonido = pygame.mixer.Sound("Resources/hoop1.wav")
-            self.sonido.set_volume(0.4)
+        if self.tipo == 'toilet':
+            self.sonido = pygame.mixer.Sound("Resources/splash.wav")
+            self.sonido.set_volume(0.6)
             radio = self.radioM * 0.8
             self.radioM = self.radioM * 0.8
 
